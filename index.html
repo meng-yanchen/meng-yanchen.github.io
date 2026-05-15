@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meng-Yan Chen — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:          #F7F4F0;
+    --bg-warm:     #EDE8E1;
+    --surface:     #FDFBF8;
+    --text:        #2A1F14;
+    --text-mid:    #5C4A35;
+    --muted:       #8C7B68;
+    --border:      rgba(60, 35, 10, 0.10);
+    --border-mid:  rgba(60, 35, 10, 0.18);
+    --brown:       #5C3D1E;
+    --brown-light: #EDE0D0;
+    --brown-pale:  #F5EDE0;
+    --green:       #2E5141;
+    --green-light: #C9DDD4;
+    --green-pale:  #E6F0EB;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(247, 244, 240, 0.90);
+    backdrop-filter: blur(14px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 3rem;
+    height: 58px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400; font-size: 19px;
+    color: var(--brown); text-decoration: none; letter-spacing: 0.01em;
+  }
+  .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+  .nav-links a {
+    font-size: 12px; font-weight: 400; color: var(--muted);
+    text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+
+  /* LAYOUT */
+  main { max-width: 800px; margin: 0 auto; padding: 0 2.5rem; }
+  section { padding: 5.5rem 0; border-bottom: 0.5px solid var(--border); }
+  section:last-child { border-bottom: none; }
+
+  /* HERO */
+  #hero { padding: 9rem 0 5.5rem; }
+  .hero-rule { width: 36px; height: 1.5px; background: var(--green); margin-bottom: 1.75rem; }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(52px, 9vw, 82px);
+    line-height: 1.0; letter-spacing: -0.02em;
+    color: var(--text); margin-bottom: 0.25rem;
+  }
+  .hero-name em { font-style: italic; color: var(--brown); }
+  .hero-title {
+    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 400; margin-bottom: 2rem;
+  }
+  .hero-tagline {
+    font-size: 17px; font-weight: 300; color: var(--text-mid);
+    max-width: 500px; line-height: 1.8; margin-bottom: 2.75rem;
+  }
+  .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px; font-weight: 500;
+    padding: 11px 24px; border-radius: 2px;
+    text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase;
+    transition: all 0.2s; cursor: pointer; border: none;
+  }
+  .btn-primary { background: var(--green); color: #F5F0EA; }
+  .btn-primary:hover { background: #234031; }
+  .btn-outline { background: transparent; color: var(--brown); border: 0.5px solid var(--brown); }
+  .btn-outline:hover { background: var(--brown-pale); }
+
+  /* SECTION HEADERS */
+  .section-label {
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--green); font-weight: 500; margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400; font-size: 38px;
+    letter-spacing: -0.01em; color: var(--text);
+    margin-bottom: 3rem; line-height: 1.15;
+  }
+  .section-title em { font-style: italic; color: var(--brown); }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: start; }
+  .about-text { font-size: 15.5px; color: var(--text-mid); line-height: 1.85; }
+  .about-text p + p { margin-top: 1.1rem; }
+  .skills-heading {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 400; margin-bottom: 1rem;
+  }
+  .skills-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag {
+    font-size: 12px; font-weight: 400; letter-spacing: 0.04em;
+    background: var(--green-pale); color: var(--green);
+    border: 0.5px solid var(--green-light);
+    padding: 5px 13px; border-radius: 2px;
+  }
+
+  /* EXPERIENCE */
+  .exp-item {
+    display: grid; grid-template-columns: 155px 1fr; gap: 2.5rem;
+    padding: 1.75rem 0; border-top: 0.5px solid var(--border);
+  }
+  .exp-item:last-child { border-bottom: 0.5px solid var(--border); }
+  .exp-date { font-size: 12px; color: var(--muted); font-weight: 400; letter-spacing: 0.04em; margin-bottom: 4px; }
+  .exp-company {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-weight: 500; color: var(--brown);
+  }
+  .exp-role { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 10px; }
+  .exp-bullets { list-style: none; padding: 0; }
+  .exp-bullets li {
+    font-size: 14px; color: var(--text-mid); line-height: 1.75;
+    padding-left: 1.1rem; position: relative; margin-bottom: 6px;
+  }
+  .exp-bullets li::before {
+    content: '—'; position: absolute; left: 0;
+    color: var(--green); font-size: 11px; top: 3px;
+  }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .project-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 3px; padding: 1.75rem;
+    text-decoration: none; display: block;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 2px; background: var(--green);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-card:hover { border-color: var(--border-mid); background: var(--bg-warm); }
+  .project-tag {
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 400; margin-bottom: 12px;
+  }
+  .project-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400; font-size: 20px;
+    color: var(--text); margin-bottom: 10px; line-height: 1.25;
+  }
+  .project-desc { font-size: 13.5px; color: var(--text-mid); line-height: 1.7; }
+  .project-footer { margin-top: 1.25rem; display: flex; gap: 7px; flex-wrap: wrap; }
+  .project-tech {
+    font-size: 11px; font-weight: 400; letter-spacing: 0.04em;
+    background: var(--brown-pale); color: var(--brown);
+    border: 0.5px solid var(--brown-light);
+    padding: 3px 10px; border-radius: 2px;
+  }
+
+  /* WRITING */
+  .writing-item {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 2rem; padding: 1.4rem 0;
+    border-top: 0.5px solid var(--border);
+    text-decoration: none;
+  }
+  .writing-item:last-child { border-bottom: 0.5px solid var(--border); }
+  .writing-item:hover .writing-title { color: var(--green); }
+  .writing-title {
+    font-size: 15.5px; font-weight: 300; color: var(--text);
+    flex: 1; line-height: 1.5; transition: color 0.2s;
+  }
+  .writing-meta { display: flex; gap: 1.25rem; white-space: nowrap; }
+  .writing-pub { font-size: 12px; color: var(--brown); font-weight: 400; }
+  .writing-date { font-size: 12px; color: var(--muted); }
+
+  /* CONTACT */
+  .contact-intro {
+    font-size: 17px; color: var(--text-mid); max-width: 460px;
+    line-height: 1.85; margin-bottom: 2.75rem; font-weight: 300;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 1px; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1.25rem;
+    font-size: 14.5px; color: var(--text); text-decoration: none;
+    padding: 1.1rem 1.25rem; background: var(--surface);
+    border: 0.5px solid var(--border);
+    transition: background 0.18s, border-color 0.18s;
+  }
+  .contact-link:first-child { border-radius: 3px 3px 0 0; }
+  .contact-link:last-child { border-radius: 0 0 3px 3px; }
+  .contact-link:hover { background: var(--green-pale); border-color: var(--green-light); }
+  .contact-type {
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--green); font-weight: 500; width: 80px;
+  }
+  .contact-value { flex: 1; color: var(--text-mid); font-weight: 300; }
+  .contact-arrow { font-size: 14px; color: var(--muted); }
+
+  /* FOOTER */
+  footer {
+    max-width: 800px; margin: 0 auto; padding: 2.25rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 0.5px solid var(--border);
+  }
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400; font-size: 16px; color: var(--brown);
+  }
+  .footer-copy { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+
+  @media (max-width: 620px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { gap: 1.25rem; }
+    main { padding: 0 1.5rem; }
+    .about-grid, .projects-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-name">Meng-Yan Chen</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-rule"></div>
+    <h1 class="hero-name">Meng-Yan <em>Chen</em></h1>
+    <p class="hero-title">Analytics Engineer &nbsp;·&nbsp; Toronto, ON</p>
+    <p class="hero-tagline">I build data systems and think critically about how technology reshapes governance — bridging analytics engineering with a deep interest in AI policy, data sovereignty, and the geopolitics of emerging tech.</p>
+    <div class="hero-links">
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#projects" class="btn btn-outline">View my work</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">About</p>
+    <h2 class="section-title">A bit about <em>me</em></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm an Analytics Engineer at Scotiabank, where I work on cloud migration architecture, production data pipelines, and executive-facing dashboards spanning multiple business units. My work sits at the intersection of data infrastructure and organizational decision-making.</p>
+        <p>My background in Political Science and Mathematics from the University of Waterloo shapes how I think about technology — not just as an engineering problem, but as a force with real political and economic consequences. I write about AI regulation, data sovereignty, and the geopolitics of the semiconductor industry.</p>
+      </div>
+      <div>
+        <p class="skills-heading">Technical skills</p>
+        <div class="skills-list">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">R</span>
+          <span class="skill-tag">GCP</span>
+          <span class="skill-tag">Airflow</span>
+          <span class="skill-tag">PowerBI</span>
+          <span class="skill-tag">NLP</span>
+          <span class="skill-tag">Machine Learning</span>
+          <span class="skill-tag">ETL / ELT Pipelines</span>
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">XGBoost</span>
+          <span class="skill-tag">Vertex AI</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="section-label">Experience</p>
+    <h2 class="section-title">Where I've <em>worked</em></h2>
+
+    <div class="exp-item">
+      <div>
+        <p class="exp-date">Oct 2024 — Present</p>
+        <p class="exp-company">Scotiabank</p>
+      </div>
+      <div>
+        <p class="exp-role">Analytics Engineer</p>
+        <ul class="exp-bullets">
+          <li>Supporting cloud tenant modernization by building data egress patterns for scalable, compliant delivery of ML models and analytics across South America.</li>
+          <li>Developed Power BI dashboards tracking migration progress, pipeline status, and delivery metrics across multiple business units.</li>
+          <li>Improved platform availability of daily analytics and model development by 20–30% through production Airflow and JupyterHub workflow support.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <p class="exp-date">Feb 2024 — Oct 2024</p>
+        <p class="exp-company">Scotiabank</p>
+      </div>
+      <div>
+        <p class="exp-role">DevOps Engineer</p>
+        <ul class="exp-bullets">
+          <li>Identified root causes of bugs through BigQuery analysis; implemented fixes via Cloud Run back-end functions and AppSheet front-end features in an Agile environment.</li>
+          <li>Redesigned the internal deployment pipeline to reduce dependencies and ensure smoother, more timely releases.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <p class="exp-date">Jun 2023 — Feb 2024</p>
+        <p class="exp-company">Scotiabank</p>
+      </div>
+      <div>
+        <p class="exp-role">Data Scientist</p>
+        <ul class="exp-bullets">
+          <li>Built a semantic search system using embedding generation and Vertex AI PaLM APIs, increasing search relevancy by 30%.</li>
+          <li>Developed a social media marketing dashboard in Looker Studio surfacing engagement, reach, and CTR metrics for cross-functional strategic decisions.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <p class="exp-date">May 2022 — Aug 2022</p>
+        <p class="exp-company">Scotiabank</p>
+      </div>
+      <div>
+        <p class="exp-role">Data Scientist Co-op</p>
+        <ul class="exp-bullets">
+          <li>Built a revenue forecasting model using historical financial features, customer segmentation, and acquisition data for commercial banking clients.</li>
+          <li>Developed a Random Forest sales prediction model and contributed to a propensity tool that prioritized 3M+ businesses for targeted outreach.</li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">Projects</p>
+    <h2 class="section-title">Things I've <em>built</em></h2>
+    <div class="projects-grid">
+
+      <a href="#" class="project-card">
+        <p class="project-tag">NLP · Policy</p>
+        <p class="project-name">Regulatory Sentiment Text Analysis</p>
+        <p class="project-desc">Applies NLP to the UK AI Regulation White Paper (2023) to quantitatively examine what the document emphasizes, how language signals political intent, and whether its five stated principles receive equal textual treatment.</p>
+        <div class="project-footer">
+          <span class="project-tech">Python</span>
+          <span class="project-tech">NLP</span>
+          <span class="project-tech">Text Analysis</span>
+        </div>
+      </a>
+
+      <a href="#" class="project-card">
+        <p class="project-tag">ML · Fairness</p>
+        <p class="project-name">Credit Scoring Bias Audit</p>
+        <p class="project-desc">A practical demonstration of what a bias audit looks like under OSFI and SR guidelines — detecting and mitigating demographic bias in a credit scoring model using industry-standard fairness metrics and two mitigation techniques.</p>
+        <div class="project-footer">
+          <span class="project-tech">Python</span>
+          <span class="project-tech">Scikit-learn</span>
+          <span class="project-tech">Fairness Metrics</span>
+        </div>
+      </a>
+
+      <a href="#" class="project-card">
+        <p class="project-tag">NLP · Recommendation</p>
+        <p class="project-name">Skincare Recommendation System</p>
+        <p class="project-desc">A personalized skincare product recommendation engine using content-based filtering to match users with optimal products based on ingredient compatibility and skin type and concern profiles.</p>
+        <div class="project-footer">
+          <span class="project-tech">Python</span>
+          <span class="project-tech">NLP</span>
+          <span class="project-tech">Content-Based Filtering</span>
+        </div>
+      </a>
+
+      <a href="#" class="project-card">
+        <p class="project-tag">AI · Search</p>
+        <p class="project-name">Semantic Search System</p>
+        <p class="project-desc">Built using EDA, embedding generation, and Vertex AI PaLM APIs — increased search relevancy by 30% and improved overall user experience for an internal Scotiabank platform.</p>
+        <div class="project-footer">
+          <span class="project-tech">Vertex AI</span>
+          <span class="project-tech">Embeddings</span>
+          <span class="project-tech">GCP</span>
+        </div>
+      </a>
+
+      <a href="#" class="project-card">
+        <p class="project-tag">ML · Forecasting</p>
+        <p class="project-name">Commercial Banking Propensity Model</p>
+        <p class="project-desc">Revenue forecasting and Random Forest sales prediction models contributing to a prospecting tool that prioritized 3M+ businesses and improved commercial banking sales targeting efficiency.</p>
+        <div class="project-footer">
+          <span class="project-tech">Python</span>
+          <span class="project-tech">Random Forest</span>
+          <span class="project-tech">XGBoost</span>
+        </div>
+      </a>
+
+      <a href="#" class="project-card">
+        <p class="project-tag">AI · Education</p>
+        <p class="project-name">IB Math Tutor Agent</p>
+        <p class="project-desc">An interactive tutoring agent leveraging the Ollama Mistral model to generate structured math questions, solutions, and lesson plans aligned to the International Baccalaureate syllabus.</p>
+        <div class="project-footer">
+          <span class="project-tech">Python</span>
+          <span class="project-tech">Ollama</span>
+          <span class="project-tech">NLP</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section id="writing">
+    <p class="section-label">Writing</p>
+    <h2 class="section-title">Essays &amp; <em>articles</em></h2>
+
+    <div>
+      <a href="#" class="writing-item">
+        <span class="writing-title">Data Sovereignty: The End of the Borderless Internet</span>
+        <span class="writing-meta">
+          <span class="writing-pub">Essay</span>
+          <span class="writing-date">2024</span>
+        </span>
+      </a>
+      <a href="#" class="writing-item">
+        <span class="writing-title">Impact of Microchip Diplomacy on National Security: Analysis of Supply Chain Vulnerabilities in the Semiconductor Industry</span>
+        <span class="writing-meta">
+          <span class="writing-pub">Essay</span>
+          <span class="writing-date">2024</span>
+        </span>
+      </a>
+      <a href="#" class="writing-item">
+        <span class="writing-title">Trade Ramifications on the Development of Artificial Intelligence</span>
+        <span class="writing-meta">
+          <span class="writing-pub">Essay</span>
+          <span class="writing-date">2023</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Let's <em>connect</em></h2>
+    <p class="contact-intro">Open to conversations about AI policy and governance roles, data collaborations, or just a good chat. Feel free to reach out.</p>
+    <div class="contact-links">
+      <a href="mailto:mengyanchen827@gmail.com" class="contact-link">
+        <span class="contact-type">Email</span>
+        <span class="contact-value">mengyanchen827@gmail.com</span>
+        <span class="contact-arrow">↗</span>
+      </a>
+      <a href="https://linkedin.com/in/meng-yanchen" class="contact-link">
+        <span class="contact-type">LinkedIn</span>
+        <span class="contact-value">linkedin.com/in/meng-yanchen</span>
+        <span class="contact-arrow">↗</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="footer-name">Meng-Yan Chen</span>
+  <span class="footer-copy">© 2025</span>
+</footer>
+
+</body>
+</html>
